@@ -143,6 +143,17 @@
     * MapleStory LoginServer 8484
     * MapleStory Scania Ch 1 - 3 7575 - 7577
 
+### Preparing XML from WZ
+1. Open **HaRepacker**
+1. Click **File** > **Open**
+1. Select a single WZ file
+1. Click **Open**
+1. Select the file in **HaRepacker**
+1. Click **Tools** > **Export Selection** > **XML** > **Private server**
+1. Navigate to `{source}\wz`
+1. Click **OK**
+1. Right-click the file in **HaRepacker** and select **Unload**
+
 ### WZ Editing
 I am going to go over how to WZ Edit with using Heena as an example. I want to change the dialogue when you talk to her. The dialogue is either in the scripts as a .js file or in the .wz files. In this example it is the .wz file. Procedure may differ based on different scenarios but hopefully this will get you an idea on how navigate the .wz file and the basics of editing.
  1. Extract **HaSuite-211.7z**
