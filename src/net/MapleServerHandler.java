@@ -39,6 +39,7 @@ import constants.ServerConstants;
 import server.TimerManager;
 
 import net.opcodes.RecvOpcode;
+import net.opcodes.SendOpcode;
 import net.server.Server;
 import net.server.audit.LockCollector;
 import net.server.audit.locks.MonitoredLockType;
@@ -211,7 +212,28 @@ public class MapleServerHandler extends IoHandlerAdapter {
     public void messageSent(IoSession session, Object message) {
         byte[] content = (byte[]) message;
         SeekableLittleEndianAccessor slea = new GenericSeekableLittleEndianAccessor(new ByteArrayByteStream(content));
-        slea.readShort(); //packetId
+        short packetId = slea.readShort(); //packetId
+        
+        if (ServerConstants.USE_DEBUG_SHOW_RCVD_PACKET) {
+            if (packetId == (short) 17) {
+                System.out.println("Received Packet: PING");
+            } else {
+                SendOpcode op = null;
+
+                for (SendOpcode opcode : SendOpcode.values()) {
+                    if (opcode.getValue() == packetId) {
+                        op = opcode;
+                        break;
+                    }
+                }
+
+                if (op != null) {
+                    System.out.println("Sent Packet: " + op.name());
+                } else {
+                    System.out.println("Sent Packet: " + packetId);
+                }
+            }
+        }
     }
 
     @Override
